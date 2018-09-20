@@ -1,14 +1,16 @@
+package Beans;
+
 public class Client {
 
-    private String id;
+    private Integer id;
     private String fullName;
 
-    public Client(String id, String fullName) {
+    public Client(Integer id, String fullName) {
         this.id = id;
         this.fullName = fullName;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
