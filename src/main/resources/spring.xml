@@ -11,16 +11,27 @@
   </bean>
 
   <bean name="eventLogger, logger" class="logger.ConsoleEventLogger"/>
+  <bean name="fileEventLogger" class="logger.FileEventLogger" init-method="init">
+    <constructor-arg index="0" ref="event"/>
+    <constructor-arg index="1" value="filename"/>
+  </bean>
 
   <bean name="application" id="app" class="App">
     <constructor-arg ref="client"/>
     <constructor-arg ref="eventLogger"/>
   </bean>
 
-  <bean name="event" class="Beans.Event">
+  <bean name="event" class="Beans.Event" scope="prototype">
     <constructor-arg value="Test message"/>
-    <constructor-arg value="" />
-    <!--нужно достать дату, скорее всего spel-->
+    <constructor-arg>
+      <bean class="java.util.Date"/>
+    </constructor-arg>
   </bean>
+  <bean id="dateFormat" class="java.text.DateFormat" abstract="true" factory-method="getDateTimeInstance"/>
 
+  <bean name="cacheFileLogger" class="logger.CacheFileLogger">>
+    <constructor-arg index="0" ref="event"/>
+    <constructor-arg index="1" value="spring-test.txt"/>
+    <constructor-arg index="2" value="5"/>
+  </bean>
 </beans>

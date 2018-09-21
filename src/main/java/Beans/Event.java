@@ -1,5 +1,6 @@
 package Beans;
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.Random;
 import org.springframework.util.StringUtils;
@@ -10,10 +11,12 @@ public class Event {
   private String msg;
   private Date date;
 
-  public Event(String msg, Date date) {
+  private DateFormat dateFormat;
+
+  public Event(Date date, DateFormat dateFormat) {
     Random random = new Random();
     this.id = random.nextInt();
-
+    this.dateFormat = dateFormat;
     this.date = date;
   }
 
@@ -27,7 +30,7 @@ public class Event {
         "id=" + id +
         ", msg='" + msg + '\'' +
         ", date=" + date +
+        ", dateFormat=" + dateFormat +
         '}';
   }
-
 }
